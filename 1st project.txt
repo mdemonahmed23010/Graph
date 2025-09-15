@@ -1,0 +1,42 @@
+# data_analysis.py
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Sample dataset
+data = {
+    "Student": ["A", "B", "C", "D", "E"],
+    "Math": [85, 76, 90, 65, 70],
+    "Science": [78, 88, 85, 60, 75],
+    "English": [82, 79, 92, 68, 73]
+}
+
+df = pd.DataFrame(data)
+
+# 1. Line plot
+plt.plot(df["Student"], df["Math"], marker="o", label="Math")
+plt.plot(df["Student"], df["Science"], marker="o", label="Science")
+plt.plot(df["Student"], df["English"], marker="o", label="English")
+plt.title("Student Marks (Line Plot)")
+plt.legend()
+plt.show()
+
+# 2. Bar plot
+df.set_index("Student")[["Math", "Science", "English"]].plot(kind="bar")
+plt.title("Student Marks (Bar Plot)")
+plt.show()
+
+# 3. Pie chart
+plt.pie(df["Math"], labels=df["Student"], autopct="%1.1f%%")
+plt.title("Math Marks Distribution (Pie Chart)")
+plt.show()
+
+# 4. Heatmap
+sns.heatmap(df.set_index("Student"), annot=True, cmap="coolwarm")
+plt.title("Heatmap of Student Marks")
+plt.show()
+
+# 5. Boxplot
+sns.boxplot(data=df[["Math", "Science", "English"]])
+plt.title("Boxplot of Marks")
+plt.show()
